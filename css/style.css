@@ -334,9 +334,9 @@ body {
 .ceo-header { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
 
 .brand-logo-img { width: 55px; height: 55px; border-radius: 12px; background-size: cover; background-position: center; }
-.spotify-logo { background-image: url('../img/logo.ico'); background-color: #1ed760; }
-.redbull-logo { background-image: url('../img/logo (4).ico'); background-color: #db0a40; }
-.nubank-logo { background-image: url('../img/logo (3).ico'); background-color: #820ad1; }
+.spotify-logo { background-image: url('../img/logo.png'); background-color: #1ed760; }
+.redbull-logo { background-image: url('../img/logo (4).png'); background-color: #db0a40; }
+.nubank-logo { background-image: url('../img/logo (3).png'); background-color: #820ad1; }
 
 .ceo-header h4 { font-size: 1.15rem; color: var(--blue-davinci); }
 .ceo-header span { font-size: 0.85rem; color: var(--text-muted); }
