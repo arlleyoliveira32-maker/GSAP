@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agência DaVinci | Arquitetura de Percepção & Marcas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. TELA DE ABERTURA: HOMENAGEM & QUEBRA-CABEÇA DE CARAVAGGIO -->
+    <div id="puzzle-intro" class="puzzle-intro">
+        
+        <div class="puzzle-header" id="puzzle-header-text">
+            <span class="badge-homenagem">EXPOSIÇÃO CONCEITUAL</span>
+            <h1>Hoje a DaVinci está homenageando o artista Caravaggio</h1>
+            <p class="homenagem-subtext">
+                Toda semana homenageamos um artista diferente, relacionando sua arte e suas técnicas ao que há de mais moderno no marketing atual.
+            </p>
+            <p class="instruction-text">
+                Clique nos 4 quadrantes para revelar como a física do contraste e a verdade visual constroem marcas inesquecíveis.
+            </p>
+        </div>
+
+        <!-- PAINEL SUPERIOR CLARO COM OS TEXTOS ORIGINAIS E PÉ NO CHÃO -->
+        <div class="puzzle-text-display-box" id="puzzle-text-display">
+            <div class="text-step-content active" data-step="0">
+                <span class="step-num-badge">INÍCIO DA JORNADA</span>
+                <p>Clique no quadrante <strong>01</strong> para iniciar a montagem do quadro e revelar as técnicas.</p>
+            </div>
+            <div class="text-step-content" data-step="1">
+                <span class="step-num-badge">01. O ATO DA VERIFICAÇÃO</span>
+                <p><strong>A Incredulidade de São Tomé:</strong> O cliente não compra só por promessas. Ele precisa "tocar a ferida" vendo depoimentos reais, avaliações e prova social antes de fechar negócio.</p>
+            </div>
+            <div class="text-step-content" data-step="2">
+                <span class="step-num-badge">02. A PARALISIA DA DÚVIDA</span>
+                <p>Anúncios genéricos geram desconfiança. Mostrar a transformação prática e transparente do produto é o que destrava a decisão de compra do consumidor.</p>
+            </div>
+            <div class="text-step-content" data-step="3">
+                <span class="step-num-badge">03. O FOCO ABSOLUTO</span>
+                <p>Elimine a poluição visual. Caravaggio apagava o fundo irrelevante da tela para destacar o principal; no marketing, tiramos os excessos da imagem para a oferta sobressair no feed.</p>
+            </div>
+            <div class="text-step-content" data-step="4">
+                <span class="step-num-badge">04. A CONTEMPLAÇÃO</span>
+                <p>Aprecie a obra. Quando o anúncio equilibra clareza visual e mensagem direta, o cliente para de rolar a tela e presta atenção na sua marca.</p>
+            </div>
+        </div>
+
+        <!-- MOLDURA CLARA COM QUADRANTES CLARAMENTE IDENTIFICÁVEIS -->
+        <div class="puzzle-container" id="puzzle-container">
+            <div class="puzzle-grid">
+                
+                <div class="puzzle-piece" data-piece="1">
+                    <div class="piece-label">01</div>
+                    <div class="piece-img piece-1"></div>
+                </div>
+
+                <div class="puzzle-piece" data-piece="2">
+                    <div class="piece-label">02</div>
+                    <div class="piece-img piece-2"></div>
+                </div>
+
+                <div class="puzzle-piece" data-piece="3">
+                    <div class="piece-label">03</div>
+                    <div class="piece-img piece-3"></div>
+                </div>
+
+                <div class="puzzle-piece" data-piece="4">
+                    <div class="piece-label">04</div>
+                    <div class="piece-img piece-4"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="puzzle-status" class="puzzle-status hidden">
+            <p class="redirect-notice">Carregando a experiência Agência DaVinci...</p>
+        </div>
+    </div>
+
+    <!-- 2. SITE OFICIAL DA AGÊNCIA DAVINCI -->
+    <div id="main-site" class="main-site hidden">
+        
+        <header class="navbar">
+            <div class="logo">DaVinci<span>.</span></div>
+            <nav class="menu">
+                <a href="#sobre">A Agência</a>
+                <a href="#universo-servicos">Universo de Serviços</a>
+                <a href="#grandes-mentes">Grandes Mentes</a>
+                <a href="#iluminacao-produto">Exemplo Prático</a>
+                <a href="#cases-ceos">CEOs & Impacto</a>
+            </nav>
+            <a href="https://agenciadavinci.com/" target="_blank" class="btn-nav">Agendar Diagnóstico</a>
+        </header>
+
+        <section id="sobre" class="hero">
+            <div class="container">
+                <span class="tag">ARQUITETURA DE MARCAS</span>
+                <h1>Construímos universos onde sua marca é a única escolha.</h1>
+                <p>Sem jargões vazios. Unimos o domínio da atenção visual à precisão de dados para transformar empresas em ativos de alto desejo.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO UNIVERSO DE SERVIÇOS (ANIMADA COM GSAP BÁSICO) -->
+        <section id="universo-servicos" class="universe-section">
+            <div class="universe-header">
+                <span class="gold-tag">O CONSTRUTOR DE ECOSSISTEMAS</span>
+                <h2>CRIE O UNIVERSO DA SUA MARCA</h2>
+                <p class="universe-subtitle">Selecione os pilares e veja a estrutura que sua empresa precisa para destacar no mercado:</p>
+            </div>
+
+            <div class="creation-triggers">
+                <button class="btn-universe active" data-target="0">CRIE SUA AUTORIDADE</button>
+                <button class="btn-universe" data-target="1">CRIE SEU DESEJO</button>
+                <button class="btn-universe" data-target="2">CRIE SUA PREVISIBILIDADE</button>
+            </div>
+
+            <div class="services-gsap-stage">
+                <div class="service-card-item active" data-index="0">
+                    <span class="num">01</span>
+                    <h3>Branding & Identidade Visual</h3>
+                    <p>Desenhamos a apresentação da sua marca com cores, fontes e padrões visuais que passam profissionalismo instantâneo.</p>
+                </div>
+
+                <div class="service-card-item" data-index="1">
+                    <span class="num">02</span>
+                    <h3>Vídeos & Conteúdo Narrativo</h3>
+                    <p>Produção de vídeos e imagens focados em mostrar o produto funcionando e gerar desejo direto no consumidor.</p>
+                </div>
+
+                <div class="service-card-item" data-index="2">
+                    <span class="num">03</span>
+                    <h3>Tráfego Pago & Anúncios Estratégicos</h3>
+                    <p>Campanhas direcionadas para alcançar as pessoas certas nas redes sociais e gerar novos clientes todos os dias.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO GRANDES MENTES (MECANISMO DO PROFESSOR: PASSOU O MOUSE, A FOTO FLUTUA) -->
+        <section id="grandes-mentes" class="mentes-section">
+            <div class="mentes-container">
+                <div class="mentes-header">
+                    <span class="gold-tag">INSPIRAÇÃO SEM LIMITES</span>
+                    <h2>INSPIRADOS POR GRANDES MENTES</h2>
+                    <p>Passe o cursor sobre o nome para ver como a filosofia dessas personalidades se aplica na prática:</p>
+                </div>
+
+                <div class="mentes-pure-list">
+                    
+                    <div class="mente-pure-item" data-img="img/steve-jobs.png">
+                        <div class="mente-pure-info">
+                            <span class="mente-tag">DESIGN & SIMPLICIDADE (CASE APPLE)</span>
+                            <h3 class="mente-pure-name">Steve Jobs</h3>
+                            <p class="mente-pure-desc">Steve Jobs provou que o menos é mais. Em vez de entupir os anúncios de especificações técnicas difíceis, a Apple foca na simplicidade, na beleza do aparelho e na experiência do usuário.</p>
+                        </div>
+                    </div>
+
+                    <div class="mente-pure-item" data-img="img/muhammad-ali.png">
+                        <div class="mente-pure-info">
+                            <span class="mente-tag">ESTRATÉGIA & PERCEPÇÃO DE VALOR</span>
+                            <h3 class="mente-pure-name">Muhammad Ali</h3>
+                            <p class="mente-pure-desc">Ali sabia que a luta se vencia na confiança e na presença antes de subir no ringue. Uma empresa precisa construir um posicionamento forte para ser respeitada e não depender de dar descontos.</p>
+                        </div>
+                    </div>
+
+                    <div class="mente-pure-item" data-img="img/caravagio.png">
+                        <div class="mente-pure-info">
+                            <span class="mente-tag">CONTRASTE & FOCO VISUAL</span>
+                            <h3 class="mente-pure-name">Caravaggio</h3>
+                            <p class="mente-pure-desc">Caravaggio colocava um facho de luz no ponto principal da tela e deixava o fundo escuro. Marcas de café premium e automóveis usam essa mesma foto de fundo escuro para destacar o produto.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- QUADRO FLUTUANTE DA IMAGEM (AULA DO PROFESSOR) -->
+                <div id="hover-image-pop" class="hover-image-pop">
+                    <img id="pop-img-src" src="" alt="Revelação">
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PRODUTO (100% SOLTO, FLUTUANTE, SEM MOLDURAS OU QUADRANTES) -->
+        <section id="iluminacao-produto" class="product-spotlight-section">
+            <div class="spotlight-container">
+                
+                <div class="spotlight-info">
+                    <span class="gold-tag">ENGENHARIA VISUAL & CONTRASTE</span>
+                    <h2>ISOLAMENTO VISUAL E DESTAQUE DE PRODUTO</h2>
+                    
+                    <div class="explanation-blocks">
+                        <div class="exp-card">
+                            <h4>1. Destaque no Feed</h4>
+                            <p>No meio de milhares de publicações do celular, uma foto bem iluminada faz a pessoa travar o dedo e ler a sua proposta.</p>
+                        </div>
+                        <div class="exp-card">
+                            <h4>2. Valor Percebido</h4>
+                            <p>Um produto com fotos escuras ou mal acabadas parece barato. A iluminação certa faz o produto parecer premium e justifica o valor cobrado.</p>
+                        </div>
+                    </div>
+
+                    <div class="marketing-toggle-group">
+                        <button id="btn-with-davinci" class="btn-toggle active">Com a DaVinci (Com Marketing)</button>
+                        <button id="btn-without-davinci" class="btn-toggle">Sem a DaVinci (Sem Marketing)</button>
+                    </div>
+                </div>
+
+                <!-- PRODUTO SOLTO FLUTUANTE NO PALCO SEM NENHUM QUADRANTE OU CAIXA -->
+                <div class="free-product-stage mode-with-davinci" id="spotlight-box">
+                    <div class="light-beam-follow" id="light-beam"></div>
+                    
+                    <div class="free-product-item" id="floating-product">
+                        <img src="img/cafe-grao-imperial.jpg" alt="Café Grão Imperial" class="product-free-img">
+                    </div>
+
+                    <div class="product-free-details">
+                        <span class="brand-sub">CASE DEMONSTRATIVO</span>
+                        <h3>Café Grão Imperial</h3>
+                        <p class="light-instruction" id="light-instruction-text">
+                            Passe o cursor sobre o produto solto para testar a luz interativa e a inclinação 3D.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO HORIZONTAL CEOS -->
+        <section id="cases-ceos" class="horizontal-section">
+            <div class="horizontal-wrapper">
+                
+                <div class="slide intro-slide">
+                    <h2>MARCAS & <br><span class="highlight">A VOZ DOS CEOS</span></h2>
+                    <p>Role verticalmente para explorar os depoimentos de grandes marcas ➔</p>
+                </div>
+
+                <div class="slide">
+                    <div class="ceo-card">
+                        <div class="ceo-header">
+                            <div class="brand-logo-img spotify-logo"></div>
+                            <div>
+                                <h4>Daniel Ek</h4>
+                                <span>CEO & Fundador — Spotify</span>
+                            </div>
+                        </div>
+                        <p class="ceo-quote">
+                            "A DaVinci compreendeu perfeitamente a importância de transformar dados em uma comunicação bonita e direta. O trabalho de contraste visual ajudou a destacar nossos serviços."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="ceo-card">
+                        <div class="ceo-header">
+                            <div class="brand-logo-img redbull-logo"></div>
+                            <div>
+                                <h4>Oliver Mintzlaff</h4>
+                                <span>CEO de Mídia — Red Bull</span>
+                            </div>
+                        </div>
+                        <p class="ceo-quote">
+                            "Para nós, criar desejo no público é essencial. A equipe da DaVinci sabe exatamente como prender a atenção das pessoas no primeiro segundo de vídeo."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="ceo-card">
+                        <div class="ceo-header">
+                            <div class="brand-logo-img nubank-logo"></div>
+                            <div>
+                                <h4>David Vélez</h4>
+                                <span>CEO & Fundador — Nubank</span>
+                            </div>
+                        </div>
+                        <p class="ceo-quote">
+                            "Explicar coisas complexas de maneira simples e elegante é raro. A DaVinci nos ajudou a deixar nossa mensagem limpa e eficiente para o público."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RODAPÉ EXPANDIDO INSTITUCIONAL -->
+        <footer class="davinci-footer-expanded">
+            <div class="footer-top-container">
+                <div class="footer-col brand-col">
+                    <h2 class="footer-logo">DaVinci<span>.</span></h2>
+                    <p class="footer-manifesto">
+                        Transformamos negócios através de apresentação visual marcante, estratégia de conteúdo e tráfego direcionado.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">Instagram</a>
+                        <a href="#" class="social-icon">LinkedIn</a>
+                        <a href="#" class="social-icon">YouTube</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="col-title">NAVEGAÇÃO</h4>
+                    <ul class="footer-links">
+                        <li><a href="#sobre">A Agência</a></li>
+                        <li><a href="#universo-servicos">Universo de Serviços</a></li>
+                        <li><a href="#grandes-mentes">Grandes Mentes</a></li>
+                        <li><a href="#iluminacao-produto">Exemplo Prático</a></li>
+                        <li><a href="#cases-ceos">CEOs & Impacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="col-title">SOLUÇÕES</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Branding & Design</a></li>
+                        <li><a href="#">Gestão de Tráfego Pago</a></li>
+                        <li><a href="#">Criação de Conteúdo</a></li>
+                        <li><a href="#">Diagnóstico de Marca</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col newsletter-col">
+                    <h4 class="col-title">INSIGHTS DAVINCI</h4>
+                    <p class="newsletter-sub">Receba nossas análises semanais de marketing diretamente no seu e-mail.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Seu e-mail corporativo" required>
+                        <button type="submit">Inscrever</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom-container">
+                <p>© 2026 Agência DaVinci. Todos os direitos reservados.</p>
+                <p class="footer-credit">Homenagem da semana ao artista Caravaggio.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- LIBRAIRIES JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    <script src="js/js.js"></script>
+</body>
+</html>

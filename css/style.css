@@ -1,0 +1,366 @@
+:root {
+    --blue-davinci: #0a192f;
+    --yellow-davinci: #d4af37;
+    --bg-light: #f8fafc;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+/* 1. TELA DE ABERTURA - QUEBRA-CABEÇA COM LATERAIS CLARAS */
+.puzzle-intro {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #080d1a;
+    color: #fff;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: all 0.8s ease;
+}
+
+.puzzle-header { text-align: center; max-width: 720px; margin-bottom: 15px; transition: opacity 0.6s ease; }
+.badge-homenagem { background: rgba(212, 175, 55, 0.2); color: var(--yellow-davinci); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; }
+.puzzle-header h1 { font-family: var(--font-heading); font-size: 1.8rem; margin: 10px 0; color: #fff; }
+.homenagem-subtext { color: var(--yellow-davinci); font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.instruction-text { color: #94a3b8; font-size: 0.85rem; }
+
+/* PAINEL SUPERIOR COM CORES CLARAS E BORDAS DOURADAS */
+.puzzle-text-display-box {
+    width: 620px;
+    min-height: 85px;
+    background: #f1f5f9;
+    border: 2px solid var(--yellow-davinci);
+    border-radius: 16px;
+    padding: 14px 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.6s ease;
+}
+
+.text-step-content { display: none; flex-direction: column; align-items: center; gap: 4px; }
+.text-step-content.active { display: flex; }
+
+.step-num-badge { color: var(--blue-davinci); font-family: var(--font-heading); font-weight: 800; font-size: 0.85rem; letter-spacing: 1.5px; }
+.text-step-content p { color: #334155; font-size: 0.9rem; line-height: 1.45; font-weight: 600; }
+
+/* MOLDURA CLARA DO QUADRO */
+.puzzle-container {
+    width: 620px;
+    height: 390px;
+    border: 3px solid #e2e8f0;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.puzzle-container.fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10000;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%; height: 100%;
+}
+
+.puzzle-piece {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.piece-label {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: #ffffff;
+    color: var(--blue-davinci);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.4s ease, background 0.3s;
+}
+
+.puzzle-piece.active .piece-label { background: var(--yellow-davinci); color: #000; }
+.puzzle-container.fullscreen .piece-label { opacity: 0 !important; }
+
+.piece-img {
+    width: 100%; height: 100%;
+    background-image: url('../img/caravaggio-tome.png');
+    background-size: 620px 390px;
+    filter: brightness(0.08) blur(8px);
+    transition: filter 0.6s ease, transform 0.6s ease, background-size 1.2s ease;
+}
+
+.puzzle-container.fullscreen .piece-img { background-size: 100vw 100vh !important; }
+
+.piece-1 { background-position: 0px 0px; }
+.piece-2 { background-position: 100% 0px; }
+.piece-3 { background-position: 0px 100%; }
+.piece-4 { background-position: 100% 100%; }
+
+.puzzle-piece.active .piece-img { filter: brightness(1) blur(0px); }
+
+.puzzle-status {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--yellow-davinci);
+    z-index: 10001;
+    background: rgba(0,0,0,0.85);
+    padding: 12px 28px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.redirect-notice { font-size: 0.85rem; color: #fff; }
+.puzzle-status.hidden { display: none; }
+
+/* 2. SITE DA DAVINCI */
+.main-site.hidden { display: none; }
+
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px; background: #fff; border-bottom: 1px solid #e2e8f0;
+}
+.logo { font-family: var(--font-heading); font-size: 1.8rem; color: var(--blue-davinci); }
+.logo span { color: var(--yellow-davinci); }
+.menu a { text-decoration: none; color: var(--text-dark); margin: 0 15px; font-weight: 600; }
+.btn-nav { background: var(--blue-davinci); color: #fff; padding: 10px 22px; border-radius: 30px; text-decoration: none; font-weight: 700; }
+
+.hero { padding: 90px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
+.hero h1 { font-family: var(--font-heading); font-size: 3.2rem; color: var(--blue-davinci); margin: 20px 0; }
+
+/* SEÇÃO UNIVERSO DE SERVIÇOS */
+.universe-section { padding: 90px 30px; background: #fff; text-align: center; }
+.universe-header h2 { font-family: var(--font-heading); color: var(--blue-davinci); font-size: 2.2rem; margin: 10px 0; }
+.universe-subtitle { color: var(--text-muted); margin-bottom: 30px; }
+.gold-tag { color: var(--yellow-davinci); font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; }
+
+.creation-triggers { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+
+.btn-universe {
+    background: #f1f5f9; border: 1px solid #cbd5e1; padding: 12px 24px;
+    border-radius: 30px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+}
+
+.btn-universe.active, .btn-universe:hover {
+    background: var(--blue-davinci); color: #fff; border-color: var(--blue-davinci);
+}
+
+.services-gsap-stage {
+    max-width: 650px; margin: 0 auto; position: relative; min-height: 180px;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.service-card-item {
+    position: absolute; width: 100%; background: var(--bg-light);
+    border: 1px solid #e2e8f0; border-radius: 20px; padding: 35px;
+    text-align: left; opacity: 0; visibility: hidden;
+    box-shadow: 0 10px 30px rgba(10, 25, 47, 0.05);
+}
+
+.service-card-item.active {
+    opacity: 1; visibility: visible; border-color: var(--yellow-davinci); background: #fff;
+}
+
+.service-card-item .num { color: var(--yellow-davinci); font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; }
+.service-card-item h3 { font-size: 1.4rem; margin: 8px 0; color: var(--blue-davinci); font-family: var(--font-heading); }
+.service-card-item p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+
+/* SEÇÃO GRANDES MENTES */
+.mentes-section { padding: 100px 60px; background: #f8fafc; position: relative; }
+.mentes-container { max-width: 1000px; margin: 0 auto; position: relative; }
+.mentes-header { text-align: center; max-width: 750px; margin: 0 auto 50px auto; }
+.mentes-header h2 { font-family: var(--font-heading); font-size: 2.4rem; color: var(--blue-davinci); margin: 10px 0; }
+
+.mentes-pure-list { display: flex; flex-direction: column; gap: 20px; }
+
+.mente-pure-item {
+    padding: 30px 40px; background: #fff; border-radius: 20px;
+    border: 1px solid #e2e8f0; transition: all 0.3s ease; cursor: pointer;
+}
+
+.mente-pure-item:hover {
+    border-color: var(--yellow-davinci);
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(10, 25, 47, 0.06);
+}
+
+.mente-pure-name { font-family: var(--font-heading); font-size: 2rem; color: var(--blue-davinci); margin: 6px 0; }
+.mente-pure-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+/* POP-UP DA IMAGEM DO PROFESSOR */
+.hover-image-pop {
+    position: fixed;
+    width: 280px;
+    height: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--yellow-davinci);
+}
+
+.hover-image-pop img { width: 100%; height: 100%; object-fit: cover; }
+.hover-image-pop.active { opacity: 1; transform: scale(1); }
+
+/* SEÇÃO PRODUTO TOTALMENTE SOLTO NO PALCO (SEM MOLDURAS OU QUADRANTES) */
+.product-spotlight-section { padding: 110px 60px; background: var(--blue-davinci); color: #fff; overflow: hidden; }
+.spotlight-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
+.spotlight-info h2 { font-family: var(--font-heading); font-size: 2.4rem; margin: 15px 0; }
+
+.explanation-blocks { margin-top: 25px; display: flex; flex-direction: column; gap: 15px; }
+.exp-card { background: rgba(255,255,255,0.05); padding: 18px; border-left: 3px solid var(--yellow-davinci); border-radius: 8px; }
+.exp-card h4 { color: var(--yellow-davinci); font-size: 1rem; margin-bottom: 5px; }
+.exp-card p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.5; }
+
+.marketing-toggle-group { display: flex; gap: 12px; margin-top: 30px; }
+
+.btn-toggle {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #ccc; padding: 10px 18px; border-radius: 20px; font-weight: 600;
+    font-size: 0.85rem; cursor: pointer; transition: all 0.3s;
+}
+
+.btn-toggle.active { background: var(--yellow-davinci); color: #000; border-color: var(--yellow-davinci); font-weight: 700; }
+
+/* PALCO DO PRODUTO SOLTO EM 3D COM CAMADA DE REFLEXO */
+.free-product-stage {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.free-product-item {
+    position: relative;
+    width: 270px;
+    height: 350px;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, filter 0.5s ease;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.product-free-img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+
+.reflection-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 60%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* FLUTUAÇÃO CONTINUA EM MODO COM A DAVINCI */
+.free-product-stage.mode-with-davinci .free-product-item {
+    animation: floatFree 4s ease-in-out infinite;
+    filter: brightness(1) contrast(1.1);
+}
+
+.free-product-stage.mode-without-davinci .free-product-item {
+    animation: none;
+    filter: brightness(0.25) grayscale(0.9);
+    transform: rotate(0deg) scale(0.95) !important;
+}
+
+.free-product-stage.mode-without-davinci .reflection-overlay { opacity: 0; }
+
+@keyframes floatFree {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+.product-free-details { text-align: center; margin-top: 25px; z-index: 2; }
+.brand-sub { color: var(--yellow-davinci); font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; }
+.product-free-details h3 { font-size: 1.6rem; margin: 5px 0; color: #fff; }
+.light-instruction { color: #cbd5e1; font-size: 0.85rem; }
+
+/* SEÇÃO HORIZONTAL CEOS */
+.horizontal-section { height: 100vh; overflow: hidden; background: #fff; }
+.horizontal-wrapper { display: flex; width: 400vw; height: 100%; }
+.slide { width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; padding: 60px; }
+
+.ceo-card {
+    width: 580px; background: var(--bg-light); padding: 40px; border-radius: 24px;
+    border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.ceo-header { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+
+.brand-logo-img { width: 55px; height: 55px; border-radius: 12px; background-size: cover; background-position: center; }
+.spotify-logo { background-image: url('../img/spotify-logo.png'); background-color: #1ed760; }
+.redbull-logo { background-image: url('../img/redbull-logo.png'); background-color: #db0a40; }
+.nubank-logo { background-image: url('../img/nubank-logo.png'); background-color: #820ad1; }
+
+.ceo-header h4 { font-size: 1.15rem; color: var(--blue-davinci); }
+.ceo-header span { font-size: 0.85rem; color: var(--text-muted); }
+.ceo-quote { font-size: 1.05rem; color: var(--text-dark); line-height: 1.6; font-style: italic; }
+
+/* RODAPÉ EXPANDIDO */
+.davinci-footer-expanded { background: #080d1a; color: #fff; padding: 80px 60px 30px 60px; border-top: 1px solid rgba(255,255,255,0.1); }
+.footer-top-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto; }
+.footer-logo { font-family: var(--font-heading); font-size: 2rem; color: #fff; }
+.footer-logo span { color: var(--yellow-davinci); }
+.footer-manifesto { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 15px 0 25px 0; }
+.social-links { display: flex; gap: 15px; }
+.social-icon { color: var(--yellow-davinci); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+
+.col-title { font-family: var(--font-heading); font-size: 0.9rem; color: var(--yellow-davinci); letter-spacing: 1.5px; margin-bottom: 20px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+.footer-links a:hover { color: #fff; }
+
+.newsletter-sub { color: #94a3b8; font-size: 0.85rem; line-height: 1.5; margin-bottom: 15px; }
+.newsletter-form { display: flex; gap: 10px; }
+.newsletter-form input { flex: 1; padding: 12px 16px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #fff; font-size: 0.85rem; }
+.newsletter-form button { background: var(--yellow-davinci); border: none; color: #000; padding: 12px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; }
+
+.footer-bottom-container { max-width: 1200px; margin: 0 auto; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; }
+.footer-credit { color: #94a3b8; }
